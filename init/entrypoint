@@ -68,7 +68,7 @@ function start_nfdump(){
             for file in $files; do
                 newfile=$(echo $(hostname)_$(date +%Y-%m-%d-%H-%M-%S))
                 nfdump -r $file -a > ../nfdump/$newfile
-                gzip ../nfdump/$newfile
+                # gzip ../nfdump/$newfile
                 echo "export file $newfile" 2>&1 | sed "s/^/[nfdump] /"
                 rm $file
             done
