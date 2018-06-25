@@ -68,6 +68,8 @@ function start_nfdump(){
             for file in $files; do
                 newfile=$(echo $(hostname)_$(date +%Y-%m-%d-%H-%M-%S))
                 nfdump -r $file -a > ../nfdump/$newfile
+                echo "send tcp to $ENDPOINT_IP:$ENDPOINT_PORT"
+                nc $ENDPOINT_IP $ENDPOINT_PORT < ../nfdump/$newfile
                 # gzip ../nfdump/$newfile
                 echo "export file $newfile" 2>&1 | sed "s/^/[nfdump] /"
                 rm $file
